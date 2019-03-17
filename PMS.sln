@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.28705.295
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PMS", "PMS\PMS.csproj", "{C2127852-D1E6-458F-9FAE-1D70FA951C73}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMS.Repository", "PMS.Repository\PMS.Repository.csproj", "{AC644EB8-E569-47FC-8EDB-8961AA2818DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PMS.Repository", "PMS.Repository\PMS.Repository.csproj", "{AC644EB8-E569-47FC-8EDB-8961AA2818DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMS.Infrastructure", "PMS.Infrastructure\PMS.Infrastructure.csproj", "{917E4FEF-1774-439B-A0BB-FEEDD91C9071}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{AC644EB8-E569-47FC-8EDB-8961AA2818DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC644EB8-E569-47FC-8EDB-8961AA2818DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC644EB8-E569-47FC-8EDB-8961AA2818DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{917E4FEF-1774-439B-A0BB-FEEDD91C9071}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{917E4FEF-1774-439B-A0BB-FEEDD91C9071}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{917E4FEF-1774-439B-A0BB-FEEDD91C9071}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{917E4FEF-1774-439B-A0BB-FEEDD91C9071}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
