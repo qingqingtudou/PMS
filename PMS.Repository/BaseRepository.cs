@@ -13,7 +13,6 @@ namespace PMS.Repository
 {
     public class BaseRepository<T>:IRepository<T> where T :Entity
     {
-        //public PMSDbContext db;
         public PMSDbContext _context;
 
         public BaseRepository(PMSDbContext context)
