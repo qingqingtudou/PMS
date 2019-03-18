@@ -11,15 +11,11 @@ namespace PMS.Services.Interfaces
 {
     public interface IUserService: IRepository<SysUser>
     {
-        SysUser GetByStr(string username, string pwd);
-        OperateResult<LoginResult> UserLogin(LoginModel model);
-
         /// <summary>
-        /// 检验token是否有效
+        /// 登录方法
         /// </summary>
-        /// <param name="token">token值</param>
-        /// <param name="otherInfo"></param>
+        /// <param name="model">用户登录模型</param>
         /// <returns></returns>
-        //bool CheckLogin(string token = "", string otherInfo = "");
+        OperateResult<LoginResult> UserLogin(LoginModel model);
     }
 }

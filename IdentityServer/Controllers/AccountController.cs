@@ -16,7 +16,7 @@ namespace IdentityServer.Controllers
 {
     public class AccountController : Controller
     {
-        private IUserService _userService;//自己写的操作数据库Admin表的service
+        private IUserService _userService;
         private readonly IIdentityServerInteractionService _interaction;
         private readonly IClientStore _clientStore;
         private readonly IAuthenticationSchemeProvider _schemeProvider;
