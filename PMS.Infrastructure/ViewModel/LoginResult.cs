@@ -6,8 +6,11 @@ namespace PMS.Infrastructure.ViewModel
 {
     public class LoginResult
     {
+        public int Id { get; set; }
+
+        public string Account { get; set; }
         public string Name { get; set; }
 
-        //public 
+        public string Token { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PMS.Infrastructure.ViewModel;
 using PMS.Services;
@@ -23,10 +24,15 @@ namespace PMS.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult Login(LoginModel model)
         {
             var result = _userService.UserLogin(model);
+            if (result.Code == 200)
+            {
+                Response.Cookies.Append("Token", result.Payload.Token);
+            }
             return Json(result);
         }
     }

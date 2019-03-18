@@ -8,9 +8,10 @@ namespace PMS.Repository
 {
     public partial class PMSDbContext:DbContext
     {
-        public PMSDbContext(DbContextOptions<PMSDbContext> options)
-            : base(options)
-        { }
+        public PMSDbContext(DbContextOptions<PMSDbContext> options): base(options)
+        {
+
+        }
 
         public virtual DbSet<Company> Companies { get; set; }
 

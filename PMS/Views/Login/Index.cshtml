@@ -54,10 +54,10 @@
                     dataType: 'text',
                     type: 'post',
                     success: function (data) {
-                        if (data == '1') {
-                            location.href = "../index.php";
+                        if (data.Code == 200) {
+                            location.href = "/Home/Index";
                         } else {
-                            layer.msg('登录名或密码错误');
+                            layer.msg(data.Message);
                         }
                     }
                 })

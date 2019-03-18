@@ -9,13 +9,12 @@ namespace PMS.Repository.Core
     /// </summary>
     public abstract class StandardEntity: Entity
     {
+        public int? Status { get; set; }
+        public bool? IsDelete { get; set; }
         public string Creator { get; set; }
 
         public DateTime? CreateTime { get; set; }
 
-        public int Status { get; set; }
-
-        public bool IsDelete { get; set; }
 
         public string Updator { get; set; }
 

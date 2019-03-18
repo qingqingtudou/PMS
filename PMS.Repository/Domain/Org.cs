@@ -7,12 +7,14 @@ using System.Text;
 namespace PMS.Repository.Domain
 {
     [Table("Org")]
-    public partial class Org: TreeEntity
+    public partial class Org: StandardEntity
     {
-        public string OrgName { get; set; }
-        public int Pid { get; set; }
-        public int Sort { get; set; }
-        public string TypeName { get; set; }
-        public string TypeId { get; set; }
+        public string Name { get; set; }
+        public string FullPath { get; set; }
+        public string FullPathText { get; set; }
+        public int? Pid { get; set; }
+        public int? Sort { get; set; }
+        //public string TypeName { get; set; }
+        //public string TypeId { get; set; }
     }
 }

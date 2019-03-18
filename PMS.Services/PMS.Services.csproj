@@ -1,19 +1,22 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Auth\BaseController.cs" />
     <Compile Remove="BaseService.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PMS.Repository\PMS.Repository.csproj" />
+    <PackageReference Include="Autofac" Version="4.9.1" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Implements\" />
+    <ProjectReference Include="..\PMS.Repository\PMS.Repository.csproj" />
   </ItemGroup>
 
 </Project>

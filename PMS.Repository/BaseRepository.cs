@@ -11,227 +11,147 @@ using System.Collections.Generic;
 
 namespace PMS.Repository
 {
-    //public class BaseRepository<T> : IRepository<T> where T : Entity
-    public class BaseRepository<T> where T : class, new()
+    public class BaseRepository<T>:IRepository<T> where T :Entity
     {
-        public PMSDbContext db;
+        //public PMSDbContext db;
+        public PMSDbContext _context;
+
+        public BaseRepository(PMSDbContext context)
+        {
+            _context = context;
+        }
+
 
         /// <summary>
-        /// 增
+        /// 根据过滤条件，获取记录
         /// </summary>
-        /// <param name="entity"></param>
-        /// <returns></returns>
-        public async Task<bool> Add(T entity)
+        /// <param name="exp">The exp.</param>
+        public IQueryable<T> Find(Expression<Func<T, bool>> exp = null)
         {
-            await db.Set<T>().AddAsync(entity);
-            return db.SaveChanges() > 0;
+            return Filter(exp);
         }
-        /// <summary>
-        /// 删
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <returns></returns>
-        public async Task<bool> Del(T entity)
+
+        public bool IsExist(Expression<Func<T, bool>> exp)
         {
-            db.Entry(entity).State = EntityState.Deleted;
-            int i = await db.SaveChangesAsync();
-            return i > 0;
-        }
-        /// <summary>
-        /// 改
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <returns></returns>
-        public async Task<bool> Edit(T entity)
-        {
-            db.Entry(entity).State = EntityState.Modified;
-            int i = await db.SaveChangesAsync();
-            return i > 0;
-        }
-        /// <summary>
-        /// 查-根据传进来的lambda表达式查询一条数据
-        /// </summary>
-        /// <param name="whereLambda"></param>
-        /// <returns></returns>
-        public async Task<T> Get(System.Linq.Expressions.Expression<Func<T, bool>> whereLambda)
-        {
-            T t = await db.Set<T>().Where(whereLambda).SingleOrDefaultAsync();
-            return t;
+            return _context.Set<T>().Any(exp);
         }
 
         /// <summary>
-        /// 查询多条数据-根据传进来的lambda和排序的lambda查询
+        /// 查找单个，且不被上下文所跟踪
         /// </summary>
-        /// <typeparam name="s"></typeparam>
-        /// <param name="pageIndex"></param>
-        /// <param name="pageSize"></param>
-        /// <param name="whereLambda"></param>
-        /// <param name="orderbyLambda"></param>
-        /// <param name="isAsc">是否升序 true or false</param>
-        /// <returns></returns>
-        public async Task<List<T>> GetList<s>(int pageIndex, int pageSize,Expression<Func<T, bool>> whereLambda,Expression<Func<T, s>> orderbyLambda, bool isAsc)
+        public T FindSingle(Expression<Func<T, bool>> exp)
         {
-            var temp = db.Set<T>().Where(whereLambda);
-            List<T> list = null;
-            if (isAsc)//升序
+            return _context.Set<T>().AsNoTracking().FirstOrDefault(exp);
+        }
+
+        /// <summary>
+        /// 得到分页记录
+        /// </summary>
+        /// <param name="pageindex">The pageindex.</param>
+        /// <param name="pagesize">The pagesize.</param>
+        /// <param name="orderby">排序，格式如："Id"/"Id descending"</param>
+        public IQueryable<T> Find(int pageindex, int pagesize, string orderby = "", Expression<Func<T, bool>> exp = null)
+        {
+            if (pageindex < 1) pageindex = 1;
+            if (string.IsNullOrEmpty(orderby))
+                orderby = "Id descending";
+
+            return Filter(exp).OrderBy(orderby).Skip(pagesize * (pageindex - 1)).Take(pagesize);
+        }
+
+        /// <summary>
+        /// 根据过滤条件获取记录数
+        /// </summary>
+        public int GetCount(Expression<Func<T, bool>> exp = null)
+        {
+            return Filter(exp).Count();
+        }
+
+        public void Add(T entity)
+        {
+            //if (string.IsNullOrEmpty(entity.Id))
+            //{
+            //    entity.Id = Guid.NewGuid().ToString();
+            //}
+            _context.Set<T>().Add(entity);
+            Save();
+            _context.Entry(entity).State = EntityState.Detached;
+        }
+
+        /// <summary>
+        /// 批量添加
+        /// </summary>
+        /// <param name="entities">The entities.</param>
+        public void BatchAdd(T[] entities)
+        {
+            //foreach (var entity in entities)
+            //{
+            //    entity.Id = Guid.NewGuid().ToString();
+            //}
+            _context.Set<T>().AddRange(entities);
+            Save();
+        }
+
+        public void Update(T entity)
+        {
+            var entry = this._context.Entry(entity);
+            entry.State = EntityState.Modified;
+
+            //如果数据没有发生变化
+            if (!this._context.ChangeTracker.HasChanges())
             {
-                list = await temp.OrderBy(orderbyLambda).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
+                return;
             }
-            else//降序
-            {
-                list = await temp.OrderByDescending(orderbyLambda).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
-            }
-            return list;
+
+            Save();
         }
+
+        public void Delete(T entity)
+        {
+            _context.Set<T>().Remove(entity);
+            Save();
+        }
+
 
         /// <summary>
-        /// 获取总条数
+        /// 实现按需要只更新部分更新
+        /// <para>如：Update(u =>u.Id==1,u =>new User{Name="ok"});</para>
         /// </summary>
-        /// <param name="whereLambda"></param>
-        /// <returns></returns>
-        public async Task<int> GetTotalCount(Expression<Func<T, bool>> whereLambda)
+        /// <param name="where">The where.</param>
+        /// <param name="entity">The entity.</param>
+        public void Update(Expression<Func<T, bool>> where, Expression<Func<T, T>> entity)
         {
-            return await db.Set<T>().Where(whereLambda).CountAsync();
+            _context.Set<T>().Where(where).Update(entity);
         }
 
-        //private PMSDbContext _context;
+        public virtual void Delete(Expression<Func<T, bool>> exp)
+        {
+            _context.Set<T>().Where(exp).Delete();
+        }
 
-        //public BaseRepository(PMSDbContext context)
-        //{
-        //    _context = context;
-        //}
+        public void Save()
+        {
+            //try
+            //{
+            _context.SaveChanges();
+            //}
+            //catch (DbEntityValidationException e)
+            //{
+            //    throw new Exception(e.EntityValidationErrors.First().ValidationErrors.First().ErrorMessage);
+            //}
+        }
 
+        private IQueryable<T> Filter(Expression<Func<T, bool>> exp)
+        {
+            var dbSet = _context.Set<T>().AsNoTracking().AsQueryable();
+            if (exp != null)
+                dbSet = dbSet.Where(exp);
+            return dbSet;
+        }
 
-        ///// <summary>
-        ///// 根据过滤条件，获取记录
-        ///// </summary>
-        ///// <param name="exp">The exp.</param>
-        //public IQueryable<T> Find(Expression<Func<T, bool>> exp = null)
-        //{
-        //    return Filter(exp);
-        //}
-
-        //public bool IsExist(Expression<Func<T, bool>> exp)
-        //{
-        //    return _context.Set<T>().Any(exp);
-        //}
-
-        ///// <summary>
-        ///// 查找单个，且不被上下文所跟踪
-        ///// </summary>
-        //public T FindSingle(Expression<Func<T, bool>> exp)
-        //{
-        //    return _context.Set<T>().AsNoTracking().FirstOrDefault(exp);
-        //}
-
-        ///// <summary>
-        ///// 得到分页记录
-        ///// </summary>
-        ///// <param name="pageindex">The pageindex.</param>
-        ///// <param name="pagesize">The pagesize.</param>
-        ///// <param name="orderby">排序，格式如："Id"/"Id descending"</param>
-        //public IQueryable<T> Find(int pageindex, int pagesize, string orderby = "", Expression<Func<T, bool>> exp = null)
-        //{
-        //    if (pageindex < 1) pageindex = 1;
-        //    if (string.IsNullOrEmpty(orderby))
-        //        orderby = "Id descending";
-
-        //    return Filter(exp).OrderBy(orderby).Skip(pagesize * (pageindex - 1)).Take(pagesize);
-        //}
-
-        ///// <summary>
-        ///// 根据过滤条件获取记录数
-        ///// </summary>
-        //public int GetCount(Expression<Func<T, bool>> exp = null)
-        //{
-        //    return Filter(exp).Count();
-        //}
-
-        //public void Add(T entity)
-        //{
-        //    //if (string.IsNullOrEmpty(entity.Id))
-        //    //{
-        //    //    entity.Id = Guid.NewGuid().ToString();
-        //    //}
-        //    _context.Set<T>().Add(entity);
-        //    Save();
-        //    _context.Entry(entity).State = EntityState.Detached;
-        //}
-
-        ///// <summary>
-        ///// 批量添加
-        ///// </summary>
-        ///// <param name="entities">The entities.</param>
-        //public void BatchAdd(T[] entities)
-        //{
-        //    //foreach (var entity in entities)
-        //    //{
-        //    //    entity.Id = Guid.NewGuid().ToString();
-        //    //}
-        //    _context.Set<T>().AddRange(entities);
-        //    Save();
-        //}
-
-        //public void Update(T entity)
-        //{
-        //    var entry = this._context.Entry(entity);
-        //    entry.State = EntityState.Modified;
-
-        //    //如果数据没有发生变化
-        //    if (!this._context.ChangeTracker.HasChanges())
-        //    {
-        //        return;
-        //    }
-
-        //    Save();
-        //}
-
-        //public void Delete(T entity)
-        //{
-        //    _context.Set<T>().Remove(entity);
-        //    Save();
-        //}
-
-
-        ///// <summary>
-        ///// 实现按需要只更新部分更新
-        ///// <para>如：Update(u =>u.Id==1,u =>new User{Name="ok"});</para>
-        ///// </summary>
-        ///// <param name="where">The where.</param>
-        ///// <param name="entity">The entity.</param>
-        //public void Update(Expression<Func<T, bool>> where, Expression<Func<T, T>> entity)
-        //{
-        //    _context.Set<T>().Where(where).Update(entity);
-        //}
-
-        //public virtual void Delete(Expression<Func<T, bool>> exp)
-        //{
-        //    _context.Set<T>().Where(exp).Delete();
-        //}
-
-        //public void Save()
-        //{
-        //    //try
-        //    //{
-        //    _context.SaveChanges();
-        //    //}
-        //    //catch (DbEntityValidationException e)
-        //    //{
-        //    //    throw new Exception(e.EntityValidationErrors.First().ValidationErrors.First().ErrorMessage);
-        //    //}
-        //}
-
-        //private IQueryable<T> Filter(Expression<Func<T, bool>> exp)
-        //{
-        //    var dbSet = _context.Set<T>().AsNoTracking().AsQueryable();
-        //    if (exp != null)
-        //        dbSet = dbSet.Where(exp);
-        //    return dbSet;
-        //}
-
-        //public int ExecuteSql(string sql)
-        //{
-        //    return _context.Database.ExecuteSqlCommand(sql);
-        //}
+        public int ExecuteSql(string sql)
+        {
+            return _context.Database.ExecuteSqlCommand(sql);
+        }
     }
 }

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PMS.Repository.Domain
 {
-    [Table("menu")]
+    [Table("Menu")]
     public partial class Menu: StandardEntity
     {
         public string Name { get; set; }
@@ -15,8 +15,8 @@ namespace PMS.Repository.Domain
 
         public string IconName { get; set; }
 
-        public int Sort { get; set; }
+        public int? Sort { get; set; }
 
-        public int Pid { get; set; }
+        public int? Pid { get; set; }
     }
 }

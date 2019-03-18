@@ -12,14 +12,14 @@ namespace PMS.Repository.Domain
 
         public string Name { get; set; }
 
-        public int Sex { get; set; }
+        public int? Sex { get; set; }
 
         public string TypeName { get; set; }
 
         public string TypeId { get; set; }
 
-        public int OrgId { get; set; }
+        public int? OrgId { get; set; }
 
-        public int RoleId { get; set; }
+        public int? RoleId { get; set; }
     }
 }

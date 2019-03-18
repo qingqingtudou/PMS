@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PMS.Infrastructure", "PMS.I
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PMS.Services", "PMS.Services\PMS.Services.csproj", "{A5FB7389-BBD6-43C8-A093-5FF90F74EC93}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServer", "IdentityServer\IdentityServer.csproj", "{0CD1F390-882F-46E6-A732-8EB0FC15D694}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{A5FB7389-BBD6-43C8-A093-5FF90F74EC93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5FB7389-BBD6-43C8-A093-5FF90F74EC93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5FB7389-BBD6-43C8-A093-5FF90F74EC93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CD1F390-882F-46E6-A732-8EB0FC15D694}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CD1F390-882F-46E6-A732-8EB0FC15D694}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CD1F390-882F-46E6-A732-8EB0FC15D694}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CD1F390-882F-46E6-A732-8EB0FC15D694}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
