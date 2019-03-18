@@ -8,36 +8,36 @@ namespace PMS.Services
 {
     public class BaseService<T> where T : Entity
     {
-        /// <summary>
-        /// 用于事务操作
-        /// </summary>
-        /// <value>The unit work.</value>
-        protected IUnitWork UnitWork;
+        ///// <summary>
+        ///// 用于事务操作
+        ///// </summary>
+        ///// <value>The unit work.</value>
+        //protected IUnitWork UnitWork;
 
-        public BaseService(IUnitWork unitWork, IRepository<T> repository)
-        {
-            UnitWork = unitWork;
-            Repository = repository;
-        }
-
-        /// <summary>
-        /// 用于普通的数据库操作
-        /// </summary>
-        /// <value>The repository.</value>
-        protected IRepository<T> Repository;
-
-        /// <summary>
-        /// 按id批量删除
-        /// </summary>
-        /// <param name="ids"></param>
-        //public void Delete(string[] ids)
+        //public BaseService(IUnitWork unitWork, IRepository<T> repository)
         //{
-        //    Repository.Delete(u => ids.Contains(u.Id));
+        //    UnitWork = unitWork;
+        //    Repository = repository;
         //}
 
-        public T Get(int id)
-        {
-            return Repository.FindSingle(u => u.Id == id);
-        }
+        ///// <summary>
+        ///// 用于普通的数据库操作
+        ///// </summary>
+        ///// <value>The repository.</value>
+        //protected IRepository<T> Repository;
+
+        ///// <summary>
+        ///// 按id批量删除
+        ///// </summary>
+        ///// <param name="ids"></param>
+        ////public void Delete(string[] ids)
+        ////{
+        ////    Repository.Delete(u => ids.Contains(u.Id));
+        ////}
+
+        //public T Get(int id)
+        //{
+        //    return Repository.FindSingle(u => u.Id == id);
+        //}
     }
 }

@@ -5,13 +5,15 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PMS.Infrastructure.ViewModel;
 using PMS.Services;
+using PMS.Services.Implements;
+using PMS.Services.Interfaces;
 
 namespace PMS.Controllers
 {
     public class LoginController : Controller
     {
-        private UserService _userService;
-        public LoginController(UserService userService)
+        private IUserService _userService;
+        public LoginController(IUserService userService)
         {
             _userService = userService;
         }

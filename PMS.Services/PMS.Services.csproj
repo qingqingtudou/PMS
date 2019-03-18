@@ -5,7 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="BaseService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\PMS.Repository\PMS.Repository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Implements\" />
   </ItemGroup>
 
 </Project>
