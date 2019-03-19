@@ -62,6 +62,18 @@ namespace PMS
             services.AddDbContext<PMSDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("PMSDbContext")));
 
+            //支持跨域
+            services.AddCors(options =>
+            {
+                // this defines a CORS policy called "default"
+                options.AddPolicy("default", policy =>
+                {
+                    policy.WithOrigins("http://www.jsclient.com")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
+
             //service注入
             services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
             services.AddScoped(typeof(ICacheContext), typeof(CacheContext));
