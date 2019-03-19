@@ -15,11 +15,13 @@ namespace PMS.Repository
 
         public virtual DbSet<Company> Companies { get; set; }
 
-        public virtual DbSet<Menu> Menus { get; set; }
-
-        public virtual DbSet<Org> Orgs { get; set; }
+        public virtual DbSet<Module> Modules { get; set; }
 
         public virtual DbSet<Role> Roles { get; set; }
+
+        public virtual DbSet<RoleModule> RoleModules { get; set; }
+
+        public virtual DbSet<Org> Orgs { get; set; }
 
         public virtual DbSet<SysUser> SysUsers { get; set; }
     }

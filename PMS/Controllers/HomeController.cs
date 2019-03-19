@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,11 +10,15 @@ using PMS.Models;
 
 namespace PMS.Controllers
 {
-    [Authorize]
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         public IActionResult Index()
         {
+            var userName = User;
+            var t = HttpContext.User.Claims;
+            var claimIdentity = (ClaimsIdentity)HttpContext.User.Identity;
+            var claimsPrincipal = claimIdentity.Claims as List<Claim>;
+            
             return View();
         }
 

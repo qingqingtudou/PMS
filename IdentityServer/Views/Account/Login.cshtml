@@ -1,6 +1,7 @@
 ﻿@{
     Layout = null;
 }
+@Model PMS.Infrastructure.Response.OperateResult;
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
@@ -27,11 +28,11 @@
             </div>
             <hr />
             <!--<div class="layui-input-inline">
-        <button type="button" class="layui-btn layui-btn-primary">QQ登录</button>
-    </div>
-    <div class="layui-input-inline">
-        <button type="button" class="layui-btn layui-btn-normal">微信登录</button>
-    </div>-->
+                <button type="button" class="layui-btn layui-btn-primary">QQ登录</button>
+            </div>
+            <div class="layui-input-inline">
+                <button type="button" class="layui-btn layui-btn-normal">微信登录</button>
+            </div>-->
             <p>
                 @*<a href="register.html" class="fl">立即注册</a>*@
                 <a href="javascript:;" class="fr">忘记密码？</a>
@@ -41,32 +42,45 @@
 
 
     <script src="~/layui/layui.js"></script>
-    @*<script type="text/javascript">
-        layui.use(['form', 'layer', 'jquery'], function () {
-
-            // 操作对象
-            var form = layui.form;
-            var $ = layui.jquery;
-            form.on('submit(login)', function (data) {
-                // console.log(data.field);
-                $.ajax({
-                    url: 'login',
-                    data: data.field,
-                    dataType: 'text',
-                    type: 'post',
-                    success: function (data) {
-                        console.log(data);
-                        if (data.Code == 200) {
-                            location.href = "/Home/Index";
-                        } else {
-                            layer.msg(data.message);
-                        }
-                    }
-                })
-                return false;
-            })
-
+    <script>
+        @*$(function () {
+            @{ 
+                if(Model != null)
+                {
+                    layer.msg(data.message);
+                }
+            }
         });
-    </script>*@
+        form.on('submit(go)', function () {
+            layer.msg(data.message);
+        });*@
+    </script>
+    @*<script type="text/javascript">
+            layui.use(['form', 'layer', 'jquery'], function () {
+
+                // 操作对象
+                var form = layui.form;
+                var $ = layui.jquery;
+                form.on('submit(login)', function (data) {
+                    // console.log(data.field);
+                    $.ajax({
+                        url: 'login',
+                        data: data.field,
+                        dataType: 'text',
+                        type: 'post',
+                        success: function (data) {
+                            console.log(data);
+                            if (data.Code == 200) {
+                                location.href = "/Home/Index";
+                            } else {
+                                layer.msg(data.message);
+                            }
+                        }
+                    })
+                    return false;
+                })
+
+            });
+        </script>*@
 </body>
 </html>

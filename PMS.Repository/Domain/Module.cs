@@ -55,5 +55,7 @@ namespace PMS.Repository.Domain
         /// </summary>
         [Description("模块标识")]
         public string Code { get; set; }
+
+        public virtual ICollection<RoleModule> RoleModules { get; set; }
     }
 }

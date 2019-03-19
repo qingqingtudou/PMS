@@ -10,5 +10,7 @@ namespace PMS.Repository.Domain
     public partial class Role: StandardEntity
     {
         public string Name { get; set; }
+
+        public virtual ICollection<RoleModule> RoleModules { get; set; }
     }
 }

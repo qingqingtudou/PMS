@@ -16,6 +16,6 @@ namespace PMS.Services.Interfaces
         /// </summary>
         /// <param name="model">用户登录模型</param>
         /// <returns></returns>
-        OperateResult<LoginResult> UserLogin(LoginModel model);
+        OperateResult<SysUser> UserLogin(LoginModel model);
     }
 }

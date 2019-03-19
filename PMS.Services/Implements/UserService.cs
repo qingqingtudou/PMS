@@ -15,11 +15,11 @@ namespace PMS.Services.Implements
         {
         }
 
-        public OperateResult<LoginResult> UserLogin(LoginModel model)
+        public OperateResult<SysUser> UserLogin(LoginModel model)
         {
             var query = _context.SysUsers.Where(f => f.Account == model.Account && f.Password == model.Password && f.IsDelete == false && f.Status == (int)EDataStatus.valid);
             var user = query.FirstOrDefault();
-            OperateResult<LoginResult> result = new OperateResult<LoginResult>();
+            OperateResult<SysUser> result = new OperateResult<SysUser>();
 
             if (user == null)
             {
@@ -29,13 +29,7 @@ namespace PMS.Services.Implements
             }
             result.Code = (int)EResponse.Ok;
             result.Message = "登录成功";
-            result.Payload = new LoginResult()
-            {
-                Id = user.Id,
-                Account = user.Account,
-                Name = user.Name,
-                Token = Guid.NewGuid().ToString().GetHashCode().ToString("x")
-            };
+            result.Payload = user;
             return result;
         }
     }

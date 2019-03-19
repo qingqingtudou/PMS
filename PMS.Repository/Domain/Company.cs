@@ -6,6 +6,9 @@ using System.Text;
 
 namespace PMS.Repository.Domain
 {
+    /// <summary>
+    /// 公司表
+    /// </summary>
     [Table("Company")]
     public partial class Company: StandardEntity
     {

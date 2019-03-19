@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using IdentityServer4.Services;
 using IdentityServer4.Stores;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PMS.Infrastructure.Auth;
 using PMS.Infrastructure.Enums;
 using PMS.Infrastructure.Response;
 using PMS.Infrastructure.ViewModel;
@@ -38,7 +40,7 @@ namespace IdentityServer.Controllers
         /// 登录页面
         /// </summary>
         [HttpGet]
-        public async Task<IActionResult> Login(string returnUrl = null)
+        public IActionResult Login(string returnUrl = null)
         {
             ViewData["returnUrl"] = returnUrl;
             return View();
@@ -54,12 +56,22 @@ namespace IdentityServer.Controllers
             var loginResult = _userService.UserLogin(model);
             if (loginResult.Code == (int)EResponse.Ok)
             {
-                AuthenticationProperties props = new AuthenticationProperties
+                AuthenticationProperties props = new AuthenticationProperties()
                 {
                     IsPersistent = true,
                     ExpiresUtc = DateTimeOffset.UtcNow.Add(TimeSpan.FromDays(1))
                 };
-                HttpContext.SignInAsync(loginResult.Payload.Id.ToString(), loginResult.Payload.Account, props);
+
+                var claim = new Claim[]
+                {
+                    new Claim("RoleId", (loginResult.Payload.RoleId??0).ToString()),
+                    new Claim("OrgId", (loginResult.Payload.OrgId ?? 0).ToString()),
+                    new Claim("RealName", loginResult.Payload.Name??string.Empty),
+                };
+
+                HttpContext.SignInAsync(loginResult.Payload.Id.ToString(), loginResult.Payload.Account, props, claim);
+                //HttpContext.User = new LoginUserPrincipal(loginResult.Payload.Account);
+                
                 if (returnUrl != null)
                 {
                     return Redirect(returnUrl);
@@ -69,12 +81,12 @@ namespace IdentityServer.Controllers
             }
             else
             {
-                //OperateResult result = new OperateResult()
-                //{
-                //    Code = (int)EResponse.NotFound,
-                //    Message = "用户名或密码错误"
-                //};
-                return View();
+                OperateResult result = new OperateResult()
+                {
+                    Code = (int)EResponse.NotFound,
+                    Message = "用户名或密码错误"
+                };
+                return View(result);
             }
         }
     }

@@ -14,6 +14,6 @@ namespace PMS.Services.Interfaces
         /// 获取角色功能模块
         /// </summary>
         /// <returns></returns>
-        List<ModuleView> GetRoleModules();
+        List<ModuleView> GetRoleModules(int roleId);
     }
 }

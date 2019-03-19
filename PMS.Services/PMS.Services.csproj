@@ -5,7 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Auth\BaseController.cs" />
+    <Compile Remove="Auth\**" />
+    <EmbeddedResource Remove="Auth\**" />
+    <None Remove="Auth\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="BaseService.cs" />
     <Compile Remove="Interfaces\IMenuUservice.cs" />
   </ItemGroup>

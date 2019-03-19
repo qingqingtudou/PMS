@@ -29,10 +29,10 @@ namespace PMS.Controllers
         public IActionResult Login(LoginModel model)
         {
             var result = _userService.UserLogin(model);
-            if (result.Code == 200)
-            {
-                Response.Cookies.Append("Token", result.Payload.Token);
-            }
+            //if (result.Code == 200)
+            //{
+            //    Response.Cookies.Append("Token", result.Payload.Token);
+            //}
             return Json(result);
         }
     }
