@@ -17,5 +17,12 @@ namespace PMS.Services.Interfaces
         /// <param name="model">用户登录模型</param>
         /// <returns></returns>
         OperateResult<SysUser> UserLogin(LoginModel model);
+
+        /// <summary>
+        /// 通过用户Id获取用户
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        SysUser GetSysUserById(int Id);
     }
 }

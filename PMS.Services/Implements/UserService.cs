@@ -1,4 +1,5 @@
-﻿using PMS.Infrastructure.Enums;
+﻿using Microsoft.EntityFrameworkCore;
+using PMS.Infrastructure.Enums;
 using PMS.Infrastructure.Response;
 using PMS.Infrastructure.ViewModel;
 using PMS.Repository;
@@ -13,6 +14,11 @@ namespace PMS.Services.Implements
     {
         public UserService(PMSDbContext context) : base(context)
         {
+        }
+
+        public SysUser GetSysUserById(int Id)
+        {
+            return _context.SysUsers.AsNoTracking().Where(w => w.Id == Id).FirstOrDefault();
         }
 
         public OperateResult<SysUser> UserLogin(LoginModel model)
