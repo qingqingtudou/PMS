@@ -21,5 +21,7 @@ namespace PMS.Repository.Domain
         public int? OrgId { get; set; }
 
         public int? RoleId { get; set; }
+
+        public string OrgFullPath { get; set; }
     }
 }
