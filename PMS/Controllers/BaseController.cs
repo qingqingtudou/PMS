@@ -27,5 +27,18 @@ namespace PMS.Controllers
                 return claimsPrincipal[3].Value;
             }
         }
+
+        /// <summary>
+        /// 当前用户Id
+        /// </summary>
+        public int UserId
+        {
+            get
+            {
+                var claimIdentity = (ClaimsIdentity)HttpContext.User.Identity;
+                var claimsPrincipal = claimIdentity.Claims as List<Claim>;
+                return Convert.ToInt32(claimsPrincipal[0].Value);
+            }
+        }
     }
 }
