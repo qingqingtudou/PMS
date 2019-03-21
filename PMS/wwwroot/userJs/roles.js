@@ -7,7 +7,7 @@ layui.config({
     var table = layui.table;
     var openauth = layui.openauth;
     var toplayer = (top == undefined || top.layer === undefined) ? layer : top.layer;  //顶层的LAYER
-    layui.droptree("/UserSession/GetOrgs", "#Organizations", "#OrganizationIds");
+    layui.droptree("/Org/GetOrgs", "#Organizations", "#OrganizationIds");
    
     $("#menus").loadMenus("Role");
 
@@ -27,7 +27,7 @@ layui.config({
     }
     //左边树状机构列表
     var ztree = function () {
-        var url = '/UserSession/GetOrgs';
+        var url = '/Org/GetOrgs';
         var zTreeObj;
         var setting = {
             view: { selectedMulti: false },

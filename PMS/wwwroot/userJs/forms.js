@@ -11,7 +11,7 @@
     var thiswin = (top == undefined) ? window : top.window;
 
 
-    layui.droptree("/UserSession/GetOrgs", "#Organizations", "#OrganizationIds");
+    layui.droptree("/Org/GetOrgs", "#Organizations", "#OrganizationIds");
     $("#menus").loadMenus("Form");
     //主列表加载，可反复调用进行刷新
     var config= {};  //table的参数，如搜索key，点击tree的id
@@ -29,7 +29,7 @@
     }
     //左边树状机构列表
     var ztree = function () {
-        var url = '/UserSession/GetOrgs';
+        var url = '/Org/GetOrgs';
         var zTreeObj;
         var setting = {
             view: { selectedMulti: false },

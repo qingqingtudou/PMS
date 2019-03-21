@@ -7,7 +7,7 @@
     var table = layui.table;
     var openauth = layui.openauth;
     var thiswin = (top == undefined) ? window : top.window;
-    layui.droptree("/UserSession/GetOrgs", "#Organizations", "#OrganizationIds");
+    layui.droptree("/Org/GetOrgs", "#Organizations", "#OrganizationIds");
 
     $("#menus").loadMenus("FlowInstanceDisposed");
    
@@ -29,7 +29,7 @@
     }
     //左边树状机构列表
     var ztree = function () {
-        var url = '/UserSession/GetOrgs';
+        var url = '/Org/GetOrgs';
         var zTreeObj;
         var setting = {
             view: { selectedMulti: false },

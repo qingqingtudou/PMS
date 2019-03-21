@@ -7,7 +7,7 @@
     var table = layui.table;
     var openauth = layui.openauth;
     var thiswin = (top == undefined) ? window : top.window;
-    layui.droptree("/UserSession/GetOrgs", "#Organizations", "#OrganizationIds");
+    layui.droptree("/Org/GetOrgs", "#Organizations", "#OrganizationIds");
 
     $("#menus").loadMenus("FlowInstance");
    

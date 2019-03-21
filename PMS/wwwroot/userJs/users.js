@@ -1,6 +1,6 @@
 layui.config({
     base: "/js/"
-}).use(['form','vue', 'ztree', 'layer', 'jquery', 'table','droptree','openauth','utils'], function () {
+}).use(['form', 'vue', 'ztree', 'layer', 'jquery', 'table', 'droptree', 'openauth', 'utils'], function () {
     var form = layui.form,
         layer = layui.layer,
         $ = layui.jquery;
@@ -8,11 +8,11 @@ layui.config({
     var openauth = layui.openauth;
     var toplayer = (top == undefined || top.layer === undefined) ? layer : top.layer;  //顶层的LAYER
     layui.droptree("/Org/GetOrgs", "#Organizations", "#OrganizationIds");
-   
+
     $("#menus").loadMenus("User");
 
     //主列表加载，可反复调用进行刷新
-    var config= {};  //table的参数，如搜索key，点击tree的id
+    var config = {};  //table的参数，如搜索key，点击tree的id
     var mainList = function (options) {
         if (options != undefined) {
             $.extend(config, options);
@@ -22,12 +22,12 @@ layui.config({
             where: config
             , response: {
                 statusCode: 200 //规定成功的状态码，默认：0
-            } 
+            }
         });
-    }
+    };
     //左边树状机构列表
     var ztree = function () {
-        var url = '/UserSession/GetOrgs';
+        var url = '/Org/GetOrgs';
         var zTreeObj;
         var setting = {
             view: { selectedMulti: false },
@@ -52,8 +52,8 @@ layui.config({
         var load = function () {
             $.getJSON(url, function (json) {
                 zTreeObj = $.fn.zTree.init($("#tree"), setting);
-                var newNode = { Name: "根节点", Id: null,ParentId:"" };
-                 json.push(newNode);
+                var newNode = { Name: "根节点", Id: null, ParentId: "" };
+                json.push(newNode);
                 zTreeObj.addNodes(null, json);
                 mainList({ orgId: "" });
                 zTreeObj.expandAll(true);
@@ -62,13 +62,13 @@ layui.config({
         load();
         return {
             reload: load
-        }
+        };
     }();
 
-    $("#tree").height( $("div.layui-table-view").height());
+    $("#tree").height($("div.layui-table-view").height());
 
     //添加（编辑）对话框
-    var editDlg = function() {
+    var editDlg = function () {
         var vm = new Vue({
             el: "#formEdit"
         });
@@ -80,13 +80,13 @@ layui.config({
                 area: ["500px", "400px"],
                 type: 1,
                 content: $('#divEdit'),
-                success: function() {
+                success: function () {
                     vm.$set('$data', data);
 
                     $(":radio[name='Sex'][value='" + data.Sex + "']").prop("checked", "checked");
                     $("input:checkbox[name='Status']").prop("checked", data.Status == 1);
                     //下面这种方式适合单独开页面，不然上次选中的结果会对本次有影响
-                   // $('input:checkbox[name="Status"][value="' + data.Status + '"]').prop('checked', true);
+                    // $('input:checkbox[name="Status"][value="' + data.Status + '"]').prop('checked', true);
                     form.render();
                 },
                 end: mainList
@@ -97,36 +97,36 @@ layui.config({
             }
             //提交数据
             form.on('submit(formSubmit)',
-                function(data) {
+                function (data) {
                     $.post(url,
                         data.field,
-                        function(data) {
+                        function (data) {
                             layer.msg(data.Message);
                         },
                         "json");
                     return false;
                 });
-        }
+        };
         return {
-            add: function() { //弹出添加
+            add: function () { //弹出添加
                 update = false;
                 show({
                     Id: ''
                 });
             },
-            update: function(data) { //弹出编辑框
+            update: function (data) { //弹出编辑框
                 update = true;
                 show(data);
             }
         };
     }();
-    
+
     //监听表格内部按钮
     table.on('tool(list)', function (obj) {
         var data = obj.data;
         if (obj.event === 'detail') {      //查看
             layer.msg('ID：' + data.Id + ' 的查看操作');
-        } 
+        }
     });
 
 
@@ -142,25 +142,25 @@ layui.config({
         , btnAdd: function () {  //添加
             editDlg.add();
         }
-         , btnEdit: function () {  //编辑
-             var checkStatus = table.checkStatus('mainList')
-               , data = checkStatus.data;
-             if (data.length != 1) {
-                 layer.msg("请选择编辑的行，且同时只能编辑一行");
-                 return;
-             }
-             editDlg.update(data[0]);
-         }
+        , btnEdit: function () {  //编辑
+            var checkStatus = table.checkStatus('mainList')
+                , data = checkStatus.data;
+            if (data.length != 1) {
+                layer.msg("请选择编辑的行，且同时只能编辑一行");
+                return;
+            }
+            editDlg.update(data[0]);
+        }
 
         , search: function () {   //搜索
             mainList({ key: $('#key').val() });
         }
-        , btnRefresh: function() {
+        , btnRefresh: function () {
             mainList();
         }
         , btnAccessModule: function () {
             var checkStatus = table.checkStatus('mainList')
-               , data = checkStatus.data;
+                , data = checkStatus.data;
             if (data.length != 1) {
                 toplayer.msg("请选择要分配的用户");
                 return;
@@ -171,21 +171,21 @@ layui.config({
                 type: 2,
                 area: ['750px', '600px'],
                 content: "/ModuleManager/Assign?type=UserModule&menuType=UserElement&id=" + data[0].Id,
-                success: function(layero, index) {
-                    
+                success: function (layero, index) {
+
                 }
             });
         }
         , btnAccessRole: function () {
             var checkStatus = table.checkStatus('mainList')
-               , data = checkStatus.data;
+                , data = checkStatus.data;
             if (data.length != 1) {
                 toplayer.msg("请选择要分配的用户");
                 return;
             }
 
             var index = toplayer.open({
-                title: "为用户【"+ data[0].Name + "】分配角色",
+                title: "为用户【" + data[0].Name + "】分配角色",
                 type: 2,
                 area: ['750px', '600px'],
                 content: "/RoleManager/Assign?type=UserRole&id=" + data[0].Id,
@@ -220,4 +220,4 @@ layui.config({
     });
 
     //监听页面主按钮操作 end
-})
+});

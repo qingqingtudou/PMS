@@ -7,7 +7,7 @@ layui.config({
     var table = layui.table;
     var openauth = layui.openauth;
     var id = $.getUrlParam("id");      //待分配的id
-    layui.droptree("/UserSession/GetOrgs", "#Organizations", "#OrganizationIds");
+    layui.droptree("/Org/GetOrgs", "#Organizations", "#OrganizationIds");
    
     //主列表加载，可反复调用进行刷新
     var config= {};  //table的参数，如搜索key，点击tree的id
@@ -63,7 +63,7 @@ layui.config({
     }
     //左边树状机构列表
     var ztree = function () {
-        var url = '/UserSession/GetOrgs';
+        var url = '/Org/GetOrgs';
         var zTreeObj;
         var setting = {
             view: { selectedMulti: false },

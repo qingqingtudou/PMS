@@ -6,7 +6,7 @@ layui.config({
         $ = layui.jquery;
     var table = layui.table;
     var openauth = layui.openauth;
-    layui.droptree("/UserSession/GetOrgs", "#ParentName", "#ParentId", false);
+    layui.droptree("/Org/GetOrgs", "#ParentName", "#ParentId", false);
 
     $("#menus").loadMenus("Org");
    
@@ -26,7 +26,7 @@ layui.config({
     }
     //左边树状机构列表
     var ztree = function () {
-        var url = '/UserSession/GetOrgs';
+        var url = '/Org/GetOrgs';
         var zTreeObj;
         var setting = {
             view: { selectedMulti: false },

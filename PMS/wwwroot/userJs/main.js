@@ -19,7 +19,7 @@ layui.config({
 	)
 
     //机构
-	$.getJSON("/UserSession/GetOrgs",
+	$.getJSON("/Org/GetOrgs",
         function (data) {
             $(".orgs span").text(data.length);
         }

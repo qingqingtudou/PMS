@@ -1,4 +1,5 @@
-﻿using PMS.Repository.Domain;
+﻿using PMS.Infrastructure;
+using PMS.Repository.Domain;
 using PMS.Repository.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,8 @@ namespace PMS.Services.Interfaces
 {
     public interface IOrgService: IRepository<Org>
     {
-        List<Org> GetOrgs(int orgId);
+        List<Org> GetOrgs(string fullpath);
+
+        List<TreeModel> GetTreeModels(string fullpath,int orgId);
     }
 }
