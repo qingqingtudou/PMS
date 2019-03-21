@@ -13,6 +13,33 @@
     <Content Remove="wwwroot\css\site.css" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\userJs\assignModule.js" />
+    <None Include="wwwroot\userJs\assignResource.js" />
+    <None Include="wwwroot\userJs\assignRole.js" />
+    <None Include="wwwroot\userJs\categories.js" />
+    <None Include="wwwroot\userJs\flowinstanceDetail.js" />
+    <None Include="wwwroot\userJs\flowInstanceDisposed.js" />
+    <None Include="wwwroot\userJs\flowInstanceEdit.js" />
+    <None Include="wwwroot\userJs\flowInstances.js" />
+    <None Include="wwwroot\userJs\flowInstanceWait.js" />
+    <None Include="wwwroot\userJs\flowSchemeDesign.js" />
+    <None Include="wwwroot\userJs\flowSchemePreview.js" />
+    <None Include="wwwroot\userJs\flowSchemes.js" />
+    <None Include="wwwroot\userJs\formEdit.js" />
+    <None Include="wwwroot\userJs\forms.js" />
+    <None Include="wwwroot\userJs\login.js" />
+    <None Include="wwwroot\userJs\main.js" />
+    <None Include="wwwroot\userJs\modules.js" />
+    <None Include="wwwroot\userJs\nodeInfo.js" />
+    <None Include="wwwroot\userJs\orgs.js" />
+    <None Include="wwwroot\userJs\preview.js" />
+    <None Include="wwwroot\userJs\resources.js" />
+    <None Include="wwwroot\userJs\roles.js" />
+    <None Include="wwwroot\userJs\users.js" />
+    <None Include="wwwroot\userJs\verification.js" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />

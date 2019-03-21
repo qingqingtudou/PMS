@@ -48,7 +48,7 @@ namespace PMS.Repository.Domain
         /// 排序号
         /// </summary>
         [Description("排序号")]
-        public int SortNo { get; set; }
+        public int? SortNo { get; set; }
 
         /// <summary>
         /// 模块标识

@@ -33,7 +33,7 @@ namespace PMS.Infrastructure.ViewModel
         /// 父节点流水号
         /// </summary>
         /// <returns></returns>
-        public string ParentId { get; set; }
+        public int? ParentId { get; set; }
 
         /// <summary>
         /// 父节点流水号
@@ -48,12 +48,12 @@ namespace PMS.Infrastructure.ViewModel
         public string IconName { get; set; }
 
 
-        public bool Checked { get; set; }
+        public bool? Checked { get; set; }
 
         /// <summary>
         /// 排序号
         /// </summary>
-        public int SortNo { get; set; }
+        public int? SortNo { get; set; }
 
         public string Code { get; set; }
 

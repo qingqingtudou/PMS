@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PMS.Infrastructure.Cache;
 using PMS.Infrastructure.Model;
@@ -16,23 +17,12 @@ namespace PMS.Controllers
 {
     public class HomeController : BaseController
     {
-        public HomeController(ICacheContext cacheContext, IUserService userService)
+        public HomeController(ICacheContext cacheContext, IUserService userService) : base(cacheContext, userService)
         {
-            _cacheContext = cacheContext;
-            _userService = userService;
         }
-
-        private ICacheContext _cacheContext;
-        private IUserService _userService;
 
         public IActionResult Index()
         {
-            var curentUser = _cacheContext.Get<UserModel>(Account);
-            if(curentUser == null)
-            {
-                var user = _userService.GetSysUserById(UserId);
-                _cacheContext.Set(Account, user, DateTime.Now.AddDays(1));
-            }
             return View();
         }
 

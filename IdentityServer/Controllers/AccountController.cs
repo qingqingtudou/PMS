@@ -50,7 +50,7 @@ namespace IdentityServer.Controllers
         /// 登录post回发处理
         /// </summary>
         [HttpPost]
-        public IActionResult Login(LoginModel model, string returnUrl = null)
+        public async Task<IActionResult> Login(LoginModel model, string returnUrl = null)
         {
             ViewData["returnUrl"] = returnUrl;
             var loginResult = _userService.UserLogin(model);
@@ -69,7 +69,7 @@ namespace IdentityServer.Controllers
                     new Claim("RealName", loginResult.Payload.Name??string.Empty),
                 };
 
-                HttpContext.SignInAsync(loginResult.Payload.Id.ToString(), loginResult.Payload.Account, props, claim);
+                await HttpContext.SignInAsync(loginResult.Payload.Id.ToString(), loginResult.Payload.Account, props, claim);
                 //HttpContext.User = new LoginUserPrincipal(loginResult.Payload.Account);
                 
                 if (returnUrl != null)

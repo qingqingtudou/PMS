@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -78,6 +74,8 @@ namespace PMS
             services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
             services.AddScoped(typeof(ICacheContext), typeof(CacheContext));
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IModuleService, ModuleService>();
+            services.AddTransient<IOrgService, OrgService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

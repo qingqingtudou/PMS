@@ -12,7 +12,7 @@ namespace PMS.Repository.Core
         /// <summary>
         /// 父节点名称
         /// </summary>
-        public string ParentId { get; set; }
+        public int? ParentId { get; set; }
         /// <summary>
         /// 父节点名称
         /// </summary>
