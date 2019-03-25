@@ -20,11 +20,11 @@
             <thead>
                 <tr>
                     <th lay-data="{checkbox:true, fixed: true}"></th>
+                    <th lay-data="{field:'Id', width:180}">ID</th>
                     <th lay-data="{field:'Account', width:150, sort: true, fixed: true}">账号</th>
                     <th lay-data="{field:'Name', width:150}">用户名</th>
                     <th lay-data="{field:'Organizations', width:135}">所属部门</th>
                     <th lay-data="{field:'CreateTime', width:180}">创建时间</th>
-                    <th lay-data="{field:'Id', width:180}">ID</th>
                     <th lay-data="{fixed: 'right', width:160, align:'center', toolbar: '#barList'}"></th>
                 </tr>
             </thead>
@@ -75,6 +75,21 @@
                 <input type="radio" name="Sex" value="0" title="女">
             </div>
         </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户角色</label>
+            <div class="layui-input-block">
+                <select name="RoleId" lay-filter="">
+                    <option value=""></option>
+                    <option value="0">普通用户</option>
+                    @*<option value="1">管理员</option>*@
+                    <option value="2">店长</option>
+                    <option value="3">店员</option>
+                    @*<option value="4">旅行</option>*@
+                </select>
+            </div>
+        </div>
+
         <div class="layui-form-item" pane>
             <label class="layui-form-label">是否可用</label>
             <div class="layui-input-block">

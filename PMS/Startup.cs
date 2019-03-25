@@ -73,9 +73,10 @@ namespace PMS
             //service注入
             services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
             services.AddScoped(typeof(ICacheContext), typeof(CacheContext));
-            services.AddTransient<IUserService, UserService>();
             services.AddTransient<IModuleService, ModuleService>();
             services.AddTransient<IOrgService, OrgService>();
+            services.AddTransient<IRoleService, RoleService>();
+            services.AddTransient<IUserService, UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

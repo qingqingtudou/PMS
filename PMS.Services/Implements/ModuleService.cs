@@ -19,6 +19,82 @@ namespace PMS.Services.Implements
         {
         }
 
+        public List<ModuleElement> GetOrgMenus()
+        {
+            List<ModuleElement> elements = new List<ModuleElement>();
+            ModuleElement element = new ModuleElement()
+            {
+                DomId = "btnAdd",
+                Name = "添加",
+                Attr = "",
+                Script = "add()",
+                Class = "layui-btn-normal",
+                Icon = "&#xe654;",
+                Remark = "添加部门",
+                Sort = 2,
+                ModuleId = 2,
+                Id = 21
+            };
+            elements.Add(element);
+            element = new ModuleElement()
+            {
+                DomId = "btnDel",
+                Name = "删除",
+                Attr = "",
+                Script = "del()",
+                Class = "layui-btn-danger",
+                Icon = "&#xe640;",
+                Remark = "刪除部门",
+                Sort = 2,
+                ModuleId = 2,
+                Id = 210
+            };
+            elements.Add(element);
+            //element = new ModuleElement()
+            //{
+            //    DomId = "btnDel",
+            //    Name = "删除",
+            //    Attr = "",
+            //    Script = "del()",
+            //    Class = "layui-btn-danger",
+            //    Icon = "&#xe640;",
+            //    Remark = "刪除部门",
+            //    Sort = 2,
+            //    ModuleId = 2,
+            //    Id = 212
+            //};
+            //elements.Add(element);
+            element = new ModuleElement()
+            {
+                DomId = "btnEdit",
+                Name = "编辑",
+                Attr = "",
+                Script = "edit()",
+                Class = "layui-btn-normal",
+                Icon = "&#xe642;",
+                Remark = "编辑部门",
+                Sort = 2,
+                ModuleId = 2,
+                Id = 213
+            };
+            elements.Add(element);
+            element = new ModuleElement()
+            {
+                DomId = "btnRefresh",
+                Name = "刷新",
+                Attr = "",
+                Script = "refresh()",
+                Class = "layui-btn-normal",
+                Icon = "&#xe615;",
+                Remark = "刷新",
+                Sort = 2,
+                ModuleId = 2,
+                Id = 2131
+            };
+            elements.Add(element);
+            return elements;
+        }
+
         /// <summary>
         /// 获取角色功能模块
         /// </summary>
@@ -64,7 +140,7 @@ namespace PMS.Services.Implements
                 Attr = "",
                 Script = "edit()",
                 Class = "layui-btn-normal",
-                Icon = "&#xe640;",
+                Icon = "&#xe642;",
                 Remark = "编辑用户",
                 Sort = 2,
                 ModuleId = 2,
@@ -82,7 +158,7 @@ namespace PMS.Services.Implements
                 Remark = "添加用户",
                 Sort = 2,
                 ModuleId = 2,
-                Id = 21
+                Id = 212
             };
             elements.Add(element);
             element = new ModuleElement()
@@ -96,7 +172,7 @@ namespace PMS.Services.Implements
                 Remark = "为用户分配角色",
                 Sort = 2,
                 ModuleId = 2,
-                Id = 21
+                Id = 211
             };
             elements.Add(element);
             element = new ModuleElement()
@@ -106,11 +182,11 @@ namespace PMS.Services.Implements
                 Attr = "",
                 Script = "refresh()",
                 Class = "layui-btn-normal",
-                Icon = "&#xe640;",
+                Icon = "&#xe615;",
                 Remark = "刷新",
                 Sort = 2,
                 ModuleId = 2,
-                Id = 21
+                Id = 2131
             };
             elements.Add(element);
             return elements;

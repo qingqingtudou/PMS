@@ -17,5 +17,7 @@ namespace PMS.Services.Interfaces
         List<ModuleView> GetRoleModules(int roleId);
 
         List<ModuleElement> GetUserMenus();
+
+        List<ModuleElement> GetOrgMenus();
     }
 }

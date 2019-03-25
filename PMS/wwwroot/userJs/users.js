@@ -188,7 +188,7 @@ layui.config({
                 title: "为用户【" + data[0].Name + "】分配角色",
                 type: 2,
                 area: ['750px', '600px'],
-                content: "/RoleManager/Assign?type=UserRole&id=" + data[0].Id,
+                content: "/Role/Assign?type=UserRole&id=" + data[0].Id,
                 success: function (layero, index) {
 
                 }

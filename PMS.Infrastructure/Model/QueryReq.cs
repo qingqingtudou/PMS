@@ -10,4 +10,11 @@ namespace PMS.Infrastructure.Model
 
         public int orgId { get; set; }
     }
+
+    public class QueryOrgReq : PageSize
+    {
+        public string fullpath { get; set; }
+
+        public int? orgId { get; set; }
+    }
 }

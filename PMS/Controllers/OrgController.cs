@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PMS.Infrastructure;
 using PMS.Infrastructure.Cache;
+using PMS.Infrastructure.Model;
 using PMS.Services.Interfaces;
 
 namespace PMS.Controllers
@@ -33,7 +34,11 @@ namespace PMS.Controllers
             return JsonHelper.Instance.Serialize(_orgService.GetTreeModels(CurrentUser.OrgFullPath, CurrentUser.OrgId ?? 0));
         }
 
-
+        public string GetSubOrgs(QueryOrgReq req)
+        {
+            req.fullpath = CurrentUser.OrgFullPath;
+            return JsonHelper.Instance.Serialize(_orgService.GetSubOrgs(req));
+        }
 
     }
 }

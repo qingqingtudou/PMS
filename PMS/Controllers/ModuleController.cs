@@ -39,6 +39,9 @@ namespace PMS.Controllers
                 case "User":
                     list = _moduleService.GetUserMenus();
                     break;
+                case "Org":
+                    list = _moduleService.GetOrgMenus();
+                    break;
                 default:
                     break;
             }

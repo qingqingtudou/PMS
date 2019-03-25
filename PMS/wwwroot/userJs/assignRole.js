@@ -1,6 +1,6 @@
 layui.config({
     base: "/js/"
-}).use(['form','vue', 'ztree', 'layer', 'jquery', 'table','droptree','openauth','utils'], function () {
+}).use(['form', 'vue', 'ztree', 'layer', 'jquery', 'table', 'droptree', 'openauth', 'utils'], function () {
     var form = layui.form,
         layer = layui.layer,
         $ = layui.jquery;
@@ -8,9 +8,9 @@ layui.config({
     var openauth = layui.openauth;
     var id = $.getUrlParam("id");      //待分配的id
     layui.droptree("/Org/GetOrgs", "#Organizations", "#OrganizationIds");
-   
+
     //主列表加载，可反复调用进行刷新
-    var config= {};  //table的参数，如搜索key，点击tree的id
+    var config = {};  //table的参数，如搜索key，点击tree的id
     var mainList = function (options) {
         if (options != undefined) {
             $.extend(config, options);
@@ -20,12 +20,12 @@ layui.config({
             where: config
             , response: {
                 statusCode: 200 //规定成功的状态码，默认：0
-            } 
+            }
             , done: function (res, curr, count) {
                 //如果是异步请求数据方式，res即为你接口返回的信息。
                 //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
 
-                $.ajax("/RoleManager/LoadForUser?userId=" + id,{
+                $.ajax("/RoleManager/LoadForUser?userId=" + id, {
                     async: false
                     , dataType: 'json'
                     , success: function (json) {
@@ -43,7 +43,7 @@ layui.config({
                                 $('.layui-table-fixed-l tr[data-index=' + index + '] input[type="checkbox"]').prop('checked', true);
                                 $('.layui-table-fixed-l tr[data-index=' + index + '] input[type="checkbox"]').next().addClass('layui-form-checked');
                             }
-                            
+
                         }
 
                         //如果构成全选
@@ -54,13 +54,13 @@ layui.config({
                         }
                     }
                 });
-                
 
-                
+
+
 
             }
         });
-    }
+    };
     //左边树状机构列表
     var ztree = function () {
         var url = '/Org/GetOrgs';
@@ -88,8 +88,8 @@ layui.config({
         var load = function () {
             $.getJSON(url, function (json) {
                 zTreeObj = $.fn.zTree.init($("#tree"), setting);
-                var newNode = { Name: "根节点", Id: null,ParentId:"" };
-                 json.push(newNode);
+                var newNode = { Name: "根节点", Id: null, ParentId: "" };
+                json.push(newNode);
                 zTreeObj.addNodes(null, json);
                 mainList({ orgId: "" });
                 zTreeObj.expandAll(true);
@@ -98,7 +98,7 @@ layui.config({
         load();
         return {
             reload: load
-        }
+        };
     }();
     $("#tree").height($("div.layui-table-view").height());
 
@@ -114,10 +114,10 @@ layui.config({
             url = "/RelevanceManager/UnAssign";
         }
         $.post(url, { type: "UserRole", firstId: id, secIds: [obj.data.Id] }
-                       , function (data) {
-                           layer.msg(data.Message);
-                       }
-                      , "json");
+            , function (data) {
+                layer.msg(data.Message);
+            }
+            , "json");
     });
     //监听页面主按钮操作 end
-})
+});

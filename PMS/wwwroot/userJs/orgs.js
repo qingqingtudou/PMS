@@ -17,7 +17,7 @@ layui.config({
             $.extend(config, options);
         }
         table.reload('mainList', {
-            url: '/UserSession/GetSubOrgs',
+            url: '/Org/GetSubOrgs',
             where: config
             , response: {
                 statusCode: 200 //规定成功的状态码，默认：0
@@ -38,7 +38,7 @@ layui.config({
                 simpleData: {
                     enable: true,
                     idKey: 'Id',
-                    pIdKey: 'ParentId',
+                    pIdKey: 'Pid',
                     rootPId: 'null'
                 }
             },
