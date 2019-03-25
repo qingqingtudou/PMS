@@ -28,7 +28,7 @@ layui.define("jquery", function (exports) {
     $.fn.extend({
         loadMenus: function (modulecode) {
             var dom = $(this);
-            $.ajax("/ModuleManager/LoadAuthorizedMenus?modulecode=" + modulecode,
+            $.ajax("/Module/GetMenuElements?modulecode=" + modulecode,
            {
                async: false
                , success: function (data) {
