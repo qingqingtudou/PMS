@@ -27,5 +27,7 @@ namespace PMS.Services.Interfaces
         SysUser GetSysUserById(int Id);
 
         OperatePageResult GetUserList(QueryUserReq pageSize);
+
+        void AddOrUpdate(UserView view);
     }
 }

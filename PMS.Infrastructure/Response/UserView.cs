@@ -10,7 +10,7 @@ namespace PMS.Infrastructure.Response
         /// 用户ID
         /// </summary>
         /// <returns></returns>
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace PMS.Infrastructure.Response
         /// <value>The organizations.</value>
         public string Organizations { get; set; }
 
-        public int OrganizationIds { get; set; }
+        public int? OrganizationIds { get; set; }
 
         //public static implicit operator UserView(User user)
         //{

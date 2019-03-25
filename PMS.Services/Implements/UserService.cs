@@ -17,6 +17,43 @@ namespace PMS.Services.Implements
         {
         }
 
+        public void AddOrUpdate(UserView view)
+        {
+            if (view.OrganizationIds <= 0) throw new Exception("请为用户分配机构");
+            view.Id = view.Id ?? 0;
+            if(view.Id <= 0)
+            {
+                var u = _context.SysUsers.Where(w => w.Account == view.Account && w.Status == (int)EDataStatus.valid && w.IsDelete == false).FirstOrDefault();
+                var o = _context.Orgs.Where(w => w.Id == view.OrganizationIds && w.Status == (int)EDataStatus.valid && w.IsDelete == false).FirstOrDefault();
+                if (u != null) throw new Exception("用户账号已存在");
+                SysUser user = new SysUser()
+                {
+                    Account = view.Account,
+                    CreateTime = DateTime.Now,
+                    IsDelete = false,
+                    Name = view.Name,
+                    OrgId = view.OrganizationIds,
+                    OrgFullPath = o.FullPath,
+                    Password = "123456",
+                    RoleId = 2,
+                    Status = (int)EDataStatus.valid,
+                    Sex = view.Sex
+                };
+                _context.SysUsers.Add(user);
+                _context.SaveChanges();
+                view.Id = user.Id;
+            }
+            else
+            {
+                var upUser = _context.SysUsers.Find(view.Id);
+                upUser.Name = view.Name;
+                upUser.Account = view.Account;
+                upUser.Sex = view.Sex;
+                upUser.Status = view.Status;
+                _context.SaveChanges();
+            }
+        }
+
         public SysUser GetSysUserById(int Id)
         {
             return _context.SysUsers.AsNoTracking().Where(w => w.Id == Id).FirstOrDefault();

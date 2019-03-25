@@ -91,9 +91,9 @@ layui.config({
                 },
                 end: mainList
             });
-            var url = "/UserManager/AddOrUpdate";
+            var url = "/Account/AddOrUpdate";
             if (update) {
-                url = "/UserManager/AddOrUpdate"; //暂时和添加一个地址
+                url = "/Account/AddOrUpdate"; //暂时和添加一个地址
             }
             //提交数据
             form.on('submit(formSubmit)',
