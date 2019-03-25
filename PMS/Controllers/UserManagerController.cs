@@ -6,14 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 using PMS.Infrastructure;
 using PMS.Infrastructure.Cache;
 using PMS.Infrastructure.Model;
-using PMS.Repository.Domain;
 using PMS.Services.Interfaces;
 
 namespace PMS.Controllers
 {
-    public class AccountController : BaseController
+    public class UserManagerController : BaseController
     {
-        public AccountController(ICacheContext cacheContext, IUserService userService) : base(cacheContext, userService)
+        public UserManagerController(ICacheContext cacheContext, IUserService userService) : base(cacheContext, userService)
         {
         }
 
@@ -22,13 +21,7 @@ namespace PMS.Controllers
             return View();
         }
 
-        public IActionResult GetUserName()
-        {
-            //var user = _cacheContext.Get<SysUser>(Account);
-            return Json(CurrentUser.Name);
-        }
-
-        public string GetUserList(QueryUserReq request)
+        public string Load(QueryUserReq request)
         {
             request.fullpath = CurrentUser.OrgFullPath;
             return JsonHelper.Instance.Serialize(_userService.GetUserList(request));

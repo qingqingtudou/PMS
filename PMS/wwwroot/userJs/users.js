@@ -18,7 +18,7 @@ layui.config({
             $.extend(config, options);
         }
         table.reload('mainList', {
-            url: '/UserManager/Load',
+            url: '/Account/GetUserList',
             where: config
             , response: {
                 statusCode: 200 //规定成功的状态码，默认：0
@@ -30,16 +30,16 @@ layui.config({
         var url = '/Org/GetOrgs';
         var zTreeObj;
         var setting = {
-            view: { selectedMulti: false },
+            view: { selectedMulti: false }, //表示禁止多选
             data: {
                 key: {
                     name: 'Name',
                     title: 'Name'
                 },
                 simpleData: {
-                    enable: true,
+                    enable: true, //表示使用简单数据模式
                     idKey: 'Id',
-                    pIdKey: 'ParentId',
+                    pIdKey: 'Pid',
                     rootPId: ""
                 }
             },
@@ -52,7 +52,7 @@ layui.config({
         var load = function () {
             $.getJSON(url, function (json) {
                 zTreeObj = $.fn.zTree.init($("#tree"), setting);
-                var newNode = { Name: "根节点", Id: null, ParentId: "" };
+                var newNode = { Name: "根节点", Id: null, Pid: "" };
                 json.push(newNode);
                 zTreeObj.addNodes(null, json);
                 mainList({ orgId: "" });

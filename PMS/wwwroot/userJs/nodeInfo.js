@@ -56,7 +56,7 @@ layui.config({
     var menucon = {};  //table的参数，如搜索key，点击tree的id
     //用户列表，等lay table没问题了，可以换成table
     var userstree = function () {
-        var url = '/UserManager/Load';
+        var url = '/Account/GetUserList';
         var menuTree;
         var setting = {
             view: { selectedMulti: true },

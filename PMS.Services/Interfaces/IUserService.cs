@@ -1,4 +1,5 @@
-﻿using PMS.Infrastructure.Response;
+﻿using PMS.Infrastructure.Model;
+using PMS.Infrastructure.Response;
 using PMS.Infrastructure.ViewModel;
 using PMS.Repository.Domain;
 using PMS.Repository.Interfaces;
@@ -24,5 +25,7 @@ namespace PMS.Services.Interfaces
         /// <param name="Id"></param>
         /// <returns></returns>
         SysUser GetSysUserById(int Id);
+
+        OperatePageResult GetUserList(QueryUserReq pageSize);
     }
 }
