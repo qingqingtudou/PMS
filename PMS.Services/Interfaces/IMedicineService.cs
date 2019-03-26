@@ -16,5 +16,9 @@ namespace PMS.Services.Interfaces
         OperatePageResult GetMedicineListByPage(PageSize pageSize);
 
         OperateResult AddMedicine(MedicineView view, string account);
+
+        OperateResult UpdateMedicine(MedicineView view, string account);
+
+        OperateResult DeleteMedicine(int id, string account);
     }
 }

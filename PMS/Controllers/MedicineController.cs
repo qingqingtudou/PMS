@@ -38,5 +38,10 @@ namespace PMS.Controllers
         {
             return JsonHelper.Instance.Serialize(_medicineService.AddMedicine(view, Account));
         }
+
+        public string UpdateMedicine(MedicineView view)
+        {
+            return JsonHelper.Instance.Serialize(_medicineService.AddMedicine(view, Account));
+        }
     }
 }

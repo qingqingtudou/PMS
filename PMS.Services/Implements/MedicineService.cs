@@ -55,6 +55,24 @@ namespace PMS.Services.Implements
 
         }
 
+        public OperateResult DeleteMedicine(int id, string account)
+        {
+            var medicine = _context.Medicines.Find(id);
+            medicine.Status = (int)EDataStatus.Deleted;
+            medicine.IsDelete = true;
+            medicine.Inventory.IsDelete = true;
+            medicine.Inventory.Status = (int)EDataStatus.Deleted;
+            try
+            {
+                _context.SaveChanges();
+                return new OperateResult();
+            }
+            catch (Exception e)
+            {
+                return new OperateResult() { Code = 500, Message = e.Message };
+            }
+        }
+
         public OperatePageResult GetMedicineListByPage(PageSize pageSize)
         {
             var query = _context.Medicines.AsNoTracking().Where(w => w.Status == (int)EDataStatus.valid && w.IsDelete == false).Select(s =>new MedicineView()
@@ -79,6 +97,32 @@ namespace PMS.Services.Implements
             };
 
             return result;
+        }
+
+        public OperateResult UpdateMedicine(MedicineView view, string account)
+        {
+            if(view.Id < 1)
+            {
+                return new OperateResult() { Code = 500, Message = "选定的药品无效，请重新选择" };
+            }
+            var medicine = _context.Medicines.Find(view.Id);
+            medicine.Name = view.Name;
+            medicine.Code = view.Code;
+            medicine.UpdateTime = DateTime.Now;
+            medicine.Updator = account;
+            medicine.DateinProduced = view.DateinProduced;
+            medicine.EndTime = view.EndTime;
+            medicine.ExpirationDate = view.ExpirationDate;
+            medicine.Inventory.Total = view.InventoryNum ?? medicine.Inventory.Total;
+            try
+            {
+                _context.SaveChanges();
+                return new OperateResult();
+            }
+            catch (Exception e)
+            {
+                return new OperateResult() { Code = 500, Message = e.Message };
+            }
         }
     }
 }
