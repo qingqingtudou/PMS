@@ -11,6 +11,9 @@ using PMS.Services.Interfaces;
 
 namespace PMS.Controllers
 {
+    /// <summary>
+    /// 药品信息 接口
+    /// </summary>
     public class MedicineController : BaseController
     {
         public MedicineController(ICacheContext cacheContext, IUserService userService, IMedicineService medicineService) : base(cacheContext, userService)

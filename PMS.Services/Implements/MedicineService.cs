@@ -23,7 +23,16 @@ namespace PMS.Services.Implements
 
         public OperatePageResult GetMedicineListByPage(PageSize pageSize)
         {
-            var query = _context.Medicines.AsNoTracking().Where(w => w.Status == (int)EDataStatus.valid && w.IsDelete == false);
+            var query = _context.Medicines.AsNoTracking().Where(w => w.Status == (int)EDataStatus.valid && w.IsDelete == false).Select(s =>new MidicineView()
+            {
+                Id = s.Id,
+                Code = s.Code,
+                DateinProduced = s.DateinProduced,
+                EndTime = s.EndTime,
+                ExpirationDate = s.ExpirationDate,
+                Name = s.Name,
+                InventoryNum = s.Inventory.Total
+            });
             if (!string.IsNullOrEmpty(pageSize.key))
             {
                 query = query.Where(w => w.Name.Contains(pageSize.key));
