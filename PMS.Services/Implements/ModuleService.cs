@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PMS.Infrastructure.Enums;
 using PMS.Infrastructure.ViewModel;
 using PMS.Repository;
 using PMS.Repository.Domain;
@@ -102,7 +103,7 @@ namespace PMS.Services.Implements
         public List<ModuleView> GetRoleModules(int roleId)
         {
             var roleModuleIds = _context.RoleModules.AsNoTracking().Where(w => w.RoleId == roleId).Select(s => s.ModuleId).ToList();
-            var modules = _context.Modules.AsNoTracking().Where(w => roleModuleIds.Contains(w.Id)).Select(s => new ModuleView()
+            var modules = _context.Modules.AsNoTracking().Where(w => roleModuleIds.Contains(w.Id) && w.Status == (int)EDataStatus.valid && w.IsDelete == false).Select(s => new ModuleView()
             {
                 Id = s.Id,
                 Name = s.Name,
