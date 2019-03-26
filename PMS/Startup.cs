@@ -71,8 +71,12 @@ namespace PMS
             });
 
             //service注入
+            //注入仓储
             services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
+            //注入缓存
             services.AddScoped(typeof(ICacheContext), typeof(CacheContext));
+            //注入实体服务
+            services.AddTransient<IMedicineService, MedicineService>();
             services.AddTransient<IModuleService, ModuleService>();
             services.AddTransient<IOrgService, OrgService>();
             services.AddTransient<IRoleService, RoleService>();

@@ -13,6 +13,6 @@ namespace PMS.Repository.Domain
 
         public int Sort { get; set; }
 
-        public virtual ICollection<RoleModule> RoleModules { get; set; }
+        public List<RoleModule> RoleModules { get; set; }
     }
 }

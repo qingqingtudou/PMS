@@ -12,6 +12,18 @@ namespace PMS.Repository.Domain
     [Table("Inventory")]
     public class Inventory: StandardEntity
     {
+        public int Total { get; set; }
 
+        /// <summary>
+        /// 药品id
+        /// </summary>
+        public int MID { get; set; }
+
+        /// <summary>
+        /// 批次
+        /// </summary>
+        public int? Batch { get; set; }
+
+        public Medicine Medicine { get; set; }
     }
 }

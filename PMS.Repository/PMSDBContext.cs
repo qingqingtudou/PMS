@@ -6,6 +6,9 @@ using System.Text;
 
 namespace PMS.Repository
 {
+    /// <summary>
+    /// 数据库上下文
+    /// </summary>
     public partial class PMSDbContext:DbContext
     {
         public PMSDbContext(DbContextOptions<PMSDbContext> options): base(options)
@@ -24,5 +27,9 @@ namespace PMS.Repository
         public virtual DbSet<Org> Orgs { get; set; }
 
         public virtual DbSet<SysUser> SysUsers { get; set; }
+
+        public virtual DbSet<Medicine> Medicines { get; set; }
+
+        public virtual DbSet<Inventory> Inventories { get; set; }
     }
 }

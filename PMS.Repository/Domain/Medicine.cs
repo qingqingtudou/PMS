@@ -34,6 +34,6 @@ namespace PMS.Repository.Domain
         /// </summary>
         public DateTime? EndTime { get; set; }
 
-
+        public Inventory Inventory { get; set; }
     }
 }
