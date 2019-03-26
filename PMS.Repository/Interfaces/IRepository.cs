@@ -1,40 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PMS.Repository.Interfaces
 {
     public interface IRepository<T> where T : class
     {
-        ///// <summary>
-        ///// 增
-        ///// </summary>
-        ///// <typeparam name=""></typeparam>
-        ///// <param name=""></param>
-        ///// <param name=""></param>
-        ///// <param name=""></param>
-        ///// <returns></returns>
-        //Task<bool> Add(T entity);
-
-        ////删
-        //Task<bool> Del(T entity);
-
-        ////改
-        //Task<bool> Edit(T entity);
-
-        ////查
-        //Task<T> Get(Expression<Func<T, bool>> whereLambda);
-
-        ////查询分页
-        //Task<List<T>> GetList<s>(int pageIndex, int pageSize, Expression<Func<T, bool>> whereLambda, Expression<Func<T, s>> orderbyLambda, bool isAsc);
-
-        ////获取总条数
-        //Task<int> GetTotalCount(Expression<Func<T, bool>> whereLambda);
         T FindSingle(Expression<Func<T, bool>> exp = null);
+
         bool IsExist(Expression<Func<T, bool>> exp);
+
         IQueryable<T> Find(Expression<Func<T, bool>> exp = null);
 
         IQueryable<T> Find(int pageindex = 1, int pagesize = 10, string orderby = "", Expression<Func<T, bool>> exp = null);
@@ -51,7 +26,6 @@ namespace PMS.Repository.Interfaces
         void Update(T entity);
 
         void Delete(T entity);
-
 
         /// <summary>
         /// 实现按需要只更新部分更新

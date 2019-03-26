@@ -1,4 +1,6 @@
-﻿using PMS.Repository.Domain;
+﻿using PMS.Infrastructure.Model;
+using PMS.Infrastructure.Response;
+using PMS.Repository.Domain;
 using PMS.Repository.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -11,6 +13,6 @@ namespace PMS.Services.Interfaces
     /// </summary>
     public interface IMedicineService:IRepository<Medicine>
     {
-
+        OperatePageResult GetMedicineListByPage(PageSize pageSize);
     }
 }

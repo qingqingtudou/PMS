@@ -10,7 +10,7 @@ namespace PMS.Repository.Domain
     /// 药品实体类
     /// </summary>
     [Table("Medicine")]
-    public class Medicine:StandardEntity
+    public partial class Medicine:StandardEntity
     {
         /// <summary>
         /// 编号

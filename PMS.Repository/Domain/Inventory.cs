@@ -10,7 +10,7 @@ namespace PMS.Repository.Domain
     /// 库存
     /// </summary>
     [Table("Inventory")]
-    public class Inventory: StandardEntity
+    public partial class Inventory: StandardEntity
     {
         public int Total { get; set; }
 
@@ -24,6 +24,7 @@ namespace PMS.Repository.Domain
         /// </summary>
         public int? Batch { get; set; }
 
+        [ForeignKey("MedicineForeignKey")]
         public Medicine Medicine { get; set; }
     }
 }

@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PMS.Infrastructure;
 using PMS.Infrastructure.Cache;
+using PMS.Infrastructure.Enums;
+using PMS.Infrastructure.Model;
 using PMS.Services.Interfaces;
 
 namespace PMS.Controllers
@@ -23,9 +25,9 @@ namespace PMS.Controllers
             return View();
         }
 
-        public string GetList()
+        public string GetList(PageSize pageSize)
         {
-            return JsonHelper.Instance.Serialize("");
+            return JsonHelper.Instance.Serialize(_medicineService.GetMedicineListByPage(pageSize));
         }
     }
 }

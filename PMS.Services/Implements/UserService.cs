@@ -83,7 +83,7 @@ namespace PMS.Services.Implements
             OperatePageResult result = new OperatePageResult
             {
                 count = query.Count(),
-                data = query.Skip((pageSize.page - 1) * pageSize.limit).Take(pageSize.limit).ToList()
+                data = query.OrderBy(o => o.Name).Skip((pageSize.page - 1) * pageSize.limit).Take(pageSize.limit).ToList()
             };
             return result;
         }
