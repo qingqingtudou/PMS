@@ -21,9 +21,43 @@ namespace PMS.Services.Implements
         {
         }
 
+        public OperateResult AddMedicine(MedicineView view,string account)
+        {
+            Medicine medicine = new Medicine()
+            {
+                Name = view.Name,
+                Code = view.Code,
+                CreateTime = DateTime.Now,
+                Creator = account,
+                DateinProduced = view.DateinProduced,
+                EndTime = view.EndTime,
+                ExpirationDate = view.ExpirationDate,
+                IsDelete = false,
+                Status = (int)EDataStatus.valid
+            };
+            medicine.Inventory.IsDelete = false;
+            medicine.Inventory.Status = (int)EDataStatus.valid;
+            medicine.Inventory.Total = view.InventoryNum ?? 0;
+            medicine.Inventory.Batch = view.Batch;
+            medicine.Inventory.CreateTime = DateTime.Now;
+            medicine.Inventory.Creator = account;
+            _context.Medicines.Add(medicine);
+
+            try
+            {
+                _context.SaveChanges();
+                return new OperateResult();
+            }
+            catch (Exception e)
+            {
+                return new OperateResult() { Code = 500,Message = e.Message};
+            }
+
+        }
+
         public OperatePageResult GetMedicineListByPage(PageSize pageSize)
         {
-            var query = _context.Medicines.AsNoTracking().Where(w => w.Status == (int)EDataStatus.valid && w.IsDelete == false).Select(s =>new MidicineView()
+            var query = _context.Medicines.AsNoTracking().Where(w => w.Status == (int)EDataStatus.valid && w.IsDelete == false).Select(s =>new MedicineView()
             {
                 Id = s.Id,
                 Code = s.Code,

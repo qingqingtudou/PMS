@@ -14,5 +14,7 @@ namespace PMS.Services.Interfaces
     public interface IMedicineService:IRepository<Medicine>
     {
         OperatePageResult GetMedicineListByPage(PageSize pageSize);
+
+        OperateResult AddMedicine(MedicineView view, string account);
     }
 }

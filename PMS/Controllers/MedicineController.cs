@@ -7,6 +7,7 @@ using PMS.Infrastructure;
 using PMS.Infrastructure.Cache;
 using PMS.Infrastructure.Enums;
 using PMS.Infrastructure.Model;
+using PMS.Infrastructure.Response;
 using PMS.Services.Interfaces;
 
 namespace PMS.Controllers
@@ -31,6 +32,11 @@ namespace PMS.Controllers
         public string GetList(PageSize pageSize)
         {
             return JsonHelper.Instance.Serialize(_medicineService.GetMedicineListByPage(pageSize));
+        }
+
+        public string AddMedicine(MedicineView view)
+        {
+            return JsonHelper.Instance.Serialize(_medicineService.AddMedicine(view, Account));
         }
     }
 }

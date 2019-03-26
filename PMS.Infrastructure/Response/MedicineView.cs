@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PMS.Infrastructure.Response
 {
-    public class MidicineView
+    public class MedicineView
     {
         public int Id { get; set; }
 
@@ -33,6 +33,11 @@ namespace PMS.Infrastructure.Response
         /// <summary>
         /// 库存
         /// </summary>
-        public int InventoryNum { get; set; }
+        public int? InventoryNum { get; set; }
+
+        /// <summary>
+        /// 批次
+        /// </summary>
+        public int? Batch { get; set; }
     }
 }
