@@ -54,7 +54,7 @@ namespace PMS
                 });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
+            //连接sql server数据库
             services.AddDbContext<PMSDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("PMSDbContext")));
 

@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="AutofacExt.cs" />
     <Compile Remove="BaseService.cs" />
     <Compile Remove="Interfaces\IMenuUservice.cs" />
   </ItemGroup>
