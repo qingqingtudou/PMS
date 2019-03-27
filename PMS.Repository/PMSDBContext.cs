@@ -16,7 +16,7 @@ namespace PMS.Repository
 
         }
 
-        public virtual DbSet<Company> Companies { get; set; }
+        public virtual DbSet<Supplier> Suppliers { get; set; }
 
         public virtual DbSet<Module> Modules { get; set; }
 
@@ -31,5 +31,7 @@ namespace PMS.Repository
         public virtual DbSet<Medicine> Medicines { get; set; }
 
         public virtual DbSet<Inventory> Inventories { get; set; }
+
+        public virtual DbSet<MedicineSupplier> MedicineSuppliers { get; set; }
     }
 }

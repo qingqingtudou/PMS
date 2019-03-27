@@ -7,13 +7,18 @@ using System.Text;
 namespace PMS.Repository.Domain
 {
     /// <summary>
-    /// 公司表
+    /// 供应商表
     /// </summary>
-    [Table("Company")]
-    public partial class Company: StandardEntity
+    [Table("Supplier")]
+    public partial class Supplier: StandardEntity
     {
         public string Name { get; set; }
 
         public string Address { get; set; }
+        public int MId { get; set; }
+
+        public Medicine Medicine { get; set; }
+
+        public List<MedicineSupplier> MedicineSuppliers { get; set; }
     }
 }
